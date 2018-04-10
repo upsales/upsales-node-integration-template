@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "node src/server.js",
-    "bump": "bumpme"
+    "bump": "bumpme",
+    "gen-env": "sed 's/=.*/=/' .env.example > .env"
   },
   "repository": {
     "type": "git",
