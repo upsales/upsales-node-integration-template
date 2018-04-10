@@ -9,16 +9,8 @@
     "bump": "bumpme",
     "gen-env": "sed 's/=.*/=/' .env.example > .env"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/upsales/upsales-node-integration-template.git"
-  },
   "author": "Upsales dev",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/upsales/upsales-node-integration-template/issues"
-  },
-  "homepage": "https://github.com/upsales/upsales-node-integration-template#readme",
   "dependencies": {
     "bumpme": "^1.1.0",
     "dotenv": "^5.0.1",

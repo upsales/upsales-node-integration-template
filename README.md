@@ -5,9 +5,11 @@ This repository should be used as a template to start building an upsales integr
 ## Get started
 To get started:
 
-```git clone https://github.com/upsales/upsales-node-integration-template.git```
+```git clone -o upsales-node-integration-template https://github.com/upsales/upsales-node-integration-template.git```
 
 ```cd upsales-node-integration-template```
+
+```rm -rf .git```
 
 ```npm install```
 
