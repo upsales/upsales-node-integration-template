@@ -1,0 +1,28 @@
+{
+  "name": "upsales-node-integration-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node src/server.js",
+    "bump": "bumpme"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/upsales/upsales-node-integration-template.git"
+  },
+  "author": "Upsales dev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/upsales/upsales-node-integration-template/issues"
+  },
+  "homepage": "https://github.com/upsales/upsales-node-integration-template#readme",
+  "dependencies": {
+    "bumpme": "^1.1.0",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "jest": "^22.4.3",
+    "winston": "^2.4.1"
+  }
+}
