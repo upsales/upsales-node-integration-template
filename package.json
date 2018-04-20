@@ -12,6 +12,7 @@
   "author": "Upsales dev",
   "license": "ISC",
   "dependencies": {
+    "@upsales/node-upsales": "^1.0.0",
     "bumpme": "^1.1.0",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
@@ -22,6 +23,6 @@
     "collectCoverageFrom": [
       "src/**/*.{js}",
       "!**/node_modules/**"
-	]  
+    ]
   }
 }
