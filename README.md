@@ -9,9 +9,9 @@ To get started:
 
 ```cd upsales-node-integration-template```
 
-```rm -rf .git```
+```npm run setup```
 
-```npm install```
+```cd /path/to/new/integration```
 
 ```npm start```
 
