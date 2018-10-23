@@ -33,7 +33,12 @@ We want you to log using the log-module provided in this template. The log-modul
 - .info()
 - .error()
 
+## Health checks
+An integration needs to respond with its name on `GET /health` this is used by the operations team
+to monitor the integration. If your integration has external dependencies then it's good to add
+healthchecks for those in the health controller before responding with the name. This endpoint will 
+be contacted once every minute to ensure that the integration is healthy and ready to serve requests.
+
 ## Documentation
-There is a file called [`README-template.md`](./README-template.md). Use this template to write a 
-README-file for your integration. This will help you, other developers and operations to understand 
+Make sure to document your integration in the README-file. This will help you, other developers and operations to understand 
 and manage the integration.
