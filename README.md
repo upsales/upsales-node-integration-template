@@ -32,3 +32,8 @@ If you want to change the port the integration server is running on it is specif
 We want you to log using the log-module provided in this template. The log-module is a winston instance and has the following methods:
 - .info()
 - .error()
+
+## Documentation
+There is a file called [`README-template.md`](./README-template.md). Use this template to write a 
+README-file for your integration. This will help you, other developers and operations to understand 
+and manage the integration.
