@@ -32,3 +32,9 @@ If you want to change the port the integration server is running on it is specif
 We want you to log using the log-module provided in this template. The log-module is a winston instance and has the following methods:
 - .info()
 - .error()
+
+## Health checks
+An integration needs to respond with its name on `GET /health` this is used by the operations team
+to monitor the integration. If your integration has external dependencies then it's good to add
+healthchecks for those in the health controller before responding with the name. This endpoint will 
+be contacted once every minute to ensure that the integration is healthy and ready to serve requests.
