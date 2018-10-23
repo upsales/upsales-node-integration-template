@@ -20,7 +20,7 @@ Now you can open a browser and go to http://localhost:3030/version. It should di
 ## Testing
 To submit an integration it must be tested. We want you to use jest for testing (https://facebook.github.io/jest/) and at least 90% test coverage is required.
 
-This template comes prepared with some tets and has full test coverage from the beginning. To run the tests, just type ```npm t -- --coverage```. The test will run and a coverage table will be presented in the end.
+This template comes prepared with some tests and has full test coverage from the beginning. To run the tests, just type ```npm t -- --coverage```. The test will run and a coverage table will be presented in the end.
 If you want to test the code while developing you can add the *---watch* flag ```npm t -- --coverage --watch```. Now as soon as you save a file, the tests will run.
 
 You can find the documentation for jest here: https://facebook.github.io/jest/docs/en/getting-started.html
