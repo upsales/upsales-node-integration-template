@@ -38,3 +38,7 @@ An integration needs to respond with its name on `GET /health` this is used by t
 to monitor the integration. If your integration has external dependencies then it's good to add
 healthchecks for those in the health controller before responding with the name. This endpoint will 
 be contacted once every minute to ensure that the integration is healthy and ready to serve requests.
+
+## Documentation
+Make sure to document your integration in the README-file. This will help you, other developers and operations to understand 
+and manage the integration.
