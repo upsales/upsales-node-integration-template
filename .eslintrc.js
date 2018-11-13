@@ -22,5 +22,6 @@ module.exports = {
 		"eqeqeq": [2, "smart"],
 		"camelcase": [2, {properties: "never"}],
 		"no-unused-expressions": [2, { "allowShortCircuit": false, "allowTernary": false }],
+		"require-await": "error"
 	}
 };
