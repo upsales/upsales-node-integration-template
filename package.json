@@ -20,7 +20,6 @@
         "dotenv": "^5.0.1",
         "express": "^4.16.4",
         "jest": "^22.4.4",
-        "nodemon": "^1.18.10",
         "winston": "^2.4.4"
     },
     "jest": {
@@ -28,5 +27,8 @@
             "src/**/*.{js}",
             "!**/node_modules/**"
         ]
+    },
+    "devDependencies": {
+        "nodemon": "^1.18.10"
     }
 }
