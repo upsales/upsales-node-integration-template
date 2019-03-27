@@ -6,6 +6,7 @@
     "scripts": {
         "test": "jest",
         "start": "node src/server.js",
+        "dev": "nodemon src/server.js",
         "bump": "bumpme",
         "gen-env": "sed 's/=.*/=/' .env.example > .env",
         "setup": "./setup.sh"
@@ -26,5 +27,8 @@
             "src/**/*.{js}",
             "!**/node_modules/**"
         ]
+    },
+    "devDependencies": {
+        "nodemon": "^1.18.10"
     }
 }
