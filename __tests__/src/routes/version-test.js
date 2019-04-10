@@ -8,7 +8,8 @@ describe('src/routes/version.js', () => {
 			const express = require('express');
 			const router = express.Router();
 			const controller = require('../../../src/controllers/version');
-			controller.mockReturnValueOnce(Promise.resolve('1.2.3'));
+			const pack = require('../../../package.json');
+			controller.mockReturnValueOnce(Promise.resolve(pack.version));
 
 			require('../../../src/routes/version');
 
