@@ -1,8 +1,7 @@
 const router = require('express').Router();
 const orderTrigger = require('../controllers/orderTrigger');
 const logger = require('../helpers/log');
-
-const isApiUser = req => req.body && req.body.user && req.body.user.name === '';
+const { isApiUser } = require('../helpers/upsalesMethods');
 
 router.post('/orderinsert/:id', async (req, res) => {
 
