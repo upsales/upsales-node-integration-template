@@ -33,3 +33,5 @@ exports.setCfValue = ({
 		field.value = value;
 	}
 };
+
+exports.isApiUser = req => req.body && req.body.user && req.body.user.email.includes('@api.upsales.com');
