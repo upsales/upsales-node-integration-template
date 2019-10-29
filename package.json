@@ -23,6 +23,7 @@
         "dotenv": "^5.0.1",
         "express": "^4.16.4",
         "jest": "^24.5.0",
+        "serialize-error": "^5.0.0",
         "winston": "^2.4.4"
     },
     "jest": {
