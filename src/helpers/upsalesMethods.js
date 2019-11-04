@@ -14,6 +14,18 @@ exports.getCfValue = ({upsalesEntity = requiredInput('upsalesEntity'), fieldId =
 	return field ? field.value : null;
 };
 
+exports.getCfValueByAlias = ({upsalesEntity = requiredInput('upsalesEntity'), alias = requiredInput('alias')}) => {
+	if(!upsalesEntity.custom){
+		return null;
+	}
+
+	const field = upsalesEntity.custom.find((customField) => {
+		return customField.alias === alias;
+	});
+
+	return field ? field.value : null;
+};
+
 exports.setCfValue = ({
 	upsalesEntity = requiredInput('upsalesEntity'),
 	fieldId = requiredInput('fieldId'),
