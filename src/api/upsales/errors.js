@@ -71,12 +71,14 @@ module.exports = {
 
   FIND_MASTER_CURRENCY_ERROR: {
     code: 'FIND_MASTER_CURRENCY_ERROR',
-    message: 'Some error has occured while searching for master currency among all the currencies'
+    message:
+      'Some error has occured while searching for master currency among all the currencies'
   },
 
   UPSALES_GET_MASTER_CURRENCY_ERROR: {
     code: 'UPSALES_GET_MASTER_CURRENCY_ERROR',
-    message: 'Some error has occured while acquiring master currency from Upsales'
+    message:
+      'Some error has occured while acquiring master currency from Upsales'
   },
 
   UPSALES_UI_SEND_PROGRESS_ERROR: {
@@ -106,15 +108,17 @@ module.exports = {
 
   UPSALES_IS_DYNAMIC_LINK_EXIST_ERROR: {
     code: 'UPSALES_IS_DYNAMIC_LINK_EXIST_ERROR',
-    message: 'Some error has occured while checking Upsales dynamic link existance'
+    message:
+      'Some error has occured while checking Upsales dynamic link existance'
   },
 
   UPSALES_CREATE_DYNAMIC_LINK_IF_NECESSARY_ERROR: {
     code: 'UPSALES_CREATE_DYNAMIC_LINK_IF_NECESSARY_ERROR',
-    message: 'Dynamic link existance checking and creation at Upsales failed with error'
+    message:
+      'Dynamic link existance checking and creation at Upsales failed with error'
   },
 
-  LOAD_ENTITY_FIELDS_ERROR:  {
+  LOAD_ENTITY_FIELDS_ERROR: {
     code: 'LOAD_ENTITY_FIELDS_ERROR',
     message: 'Unexpected loading entity fields error'
   },

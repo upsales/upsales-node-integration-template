@@ -1,3 +1,3 @@
 module.exports = async () => {
-	return 'ok';
+  return 'ok';
 };
