@@ -2,18 +2,18 @@
  * Upsales API wrapper
  */
 
-const axios = require('axios');
-const axiosRetry = require('axios-retry');
+const axios = require("axios");
+const axiosRetry = require("axios-retry");
 
-const AppConfig = require('./appConfig');
-const ClientParam = require('./clientParam');
-const Currency = require('./currency');
-const CustomFields = require('./customFields');
-const ExternalCall = require('./externalCall');
-const DynamicLink = require('./dynamicLink');
-const UINotification = require('./uiNotification');
+const AppConfig = require("./appConfig");
+const ClientParam = require("./clientParam");
+const Currency = require("./currency");
+const CustomFields = require("./customFields");
+const ExternalCall = require("./externalCall");
+const DynamicLink = require("./dynamicLink");
+const UINotification = require("./uiNotification");
 
-const requiredInput = require('../../helpers/errorsHelper').requiredInput;
+const requiredInput = require("../../helpers/errorsHelper").requiredInput;
 
 axiosRetry(axios, {
   retries: 6,
@@ -27,8 +27,8 @@ axiosRetry(axios, {
  * @param {object} dependencies - dependencies of the Upsales API wrapper
  */
 module.exports = function(
-  options = requiredInput('options'),
-  { upsales, logger, errorsHelper } = requiredInput('dependencies')
+  options = requiredInput("options"),
+  { upsales, logger, errorsHelper } = requiredInput("dependencies")
 ) {
   const dependencies = { axios, errorsHelper, logger, upsales };
 

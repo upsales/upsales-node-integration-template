@@ -1,17 +1,17 @@
-const errorsHelper = require('../../../../src/helpers/errorsHelper');
-const logger = require('../../../../src/helpers/log');
+const errorsHelper = require("../../../../src/helpers/errorsHelper");
+const logger = require("../../../../src/helpers/log");
 
-const errors = require('../../../../src/api/upsales/errors');
+const errors = require("../../../../src/api/upsales/errors");
 
-const API_KEY = 'TEST_API_KEY';
+const API_KEY = "TEST_API_KEY";
 
 const getDefaultAxiosOptions = () => {
   return {
-    method: 'GET',
-    url: 'https://power.upsales.com/api/v2/currencies',
+    method: "GET",
+    url: "https://power.upsales.com/api/v2/currencies",
     headers: {
       Cookie: `token=${API_KEY}`,
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     }
   };
 };
@@ -19,27 +19,27 @@ const getDefaultAxiosOptions = () => {
 const getDefaultCurrencies = () => ({
   data: {
     data: [
-      { iso: 'EUR' },
-      { iso: 'SEK', masterCurrency: true },
-      { iso: 'USD' },
-      { iso: 'JPY' }
+      { iso: "EUR" },
+      { iso: "SEK", masterCurrency: true },
+      { iso: "USD" },
+      { iso: "JPY" }
     ]
   }
 });
 
 const getDefaultMasterCurrency = () => {
-  return 'SEK';
+  return "SEK";
 };
 
-describe('src/api/upsales/currency.js: getCurrencies', () => {
+describe("src/api/upsales/currency.js: getCurrencies", () => {
   beforeEach(() => {
     jest.resetModules();
-    jest.mock('axios');
+    jest.mock("axios");
   });
 
-  it('getCurrencies should send correct GET request to acquire currencies from Upsales', async () => {
-    const UpsalesApi = require('../../../../src/api/upsales/currency');
-    const axios = require('axios');
+  it("getCurrencies should send correct GET request to acquire currencies from Upsales", async () => {
+    const UpsalesApi = require("../../../../src/api/upsales/currency");
+    const axios = require("axios");
     axios.mockResolvedValue(getDefaultCurrencies());
     const upsalesApi = new UpsalesApi(
       { apiKey: API_KEY },
@@ -52,10 +52,10 @@ describe('src/api/upsales/currency.js: getCurrencies', () => {
     expect(axios.mock.calls[0]).toEqual([getDefaultAxiosOptions()]);
   });
 
-  it('getCurrencies should throw exception in case of axios promise rejection', async () => {
-    const UpsalesApi = require('../../../../src/api/upsales/currency');
-    const axios = require('axios');
-    axios.mockRejectedValue('Some error');
+  it("getCurrencies should throw exception in case of axios promise rejection", async () => {
+    const UpsalesApi = require("../../../../src/api/upsales/currency");
+    const axios = require("axios");
+    axios.mockRejectedValue("Some error");
     const upsalesApi = new UpsalesApi(
       { apiKey: API_KEY },
       { axios, errorsHelper, logger }
@@ -70,15 +70,15 @@ describe('src/api/upsales/currency.js: getCurrencies', () => {
   });
 });
 
-describe('src/api/upsales/currency.js: getMasterCurrency', () => {
+describe("src/api/upsales/currency.js: getMasterCurrency", () => {
   beforeEach(() => {
     jest.resetModules();
-    jest.mock('axios');
+    jest.mock("axios");
   });
 
-  it('getMasterCurrency should send correct GET request to acquire currencies from Upsales', async () => {
-    const UpsalesApi = require('../../../../src/api/upsales/currency');
-    const axios = require('axios');
+  it("getMasterCurrency should send correct GET request to acquire currencies from Upsales", async () => {
+    const UpsalesApi = require("../../../../src/api/upsales/currency");
+    const axios = require("axios");
     axios.mockResolvedValue(getDefaultCurrencies());
     const upsalesApi = new UpsalesApi(
       { apiKey: API_KEY },
@@ -90,9 +90,9 @@ describe('src/api/upsales/currency.js: getMasterCurrency', () => {
     expect(axios.mock.calls[0]).toEqual([getDefaultAxiosOptions()]);
   });
 
-  it('getMasterCurrency should return correct master currency ISO code', async () => {
-    const UpsalesApi = require('../../../../src/api/upsales/currency');
-    const axios = require('axios');
+  it("getMasterCurrency should return correct master currency ISO code", async () => {
+    const UpsalesApi = require("../../../../src/api/upsales/currency");
+    const axios = require("axios");
     axios.mockResolvedValue(getDefaultCurrencies());
     const upsalesApi = new UpsalesApi(
       { apiKey: API_KEY },
@@ -104,10 +104,10 @@ describe('src/api/upsales/currency.js: getMasterCurrency', () => {
     expect(masterCurrency).toEqual(getDefaultMasterCurrency());
   });
 
-  it('getMasterCurrency should throw exception in case of axios promise rejection', async () => {
-    const UpsalesApi = require('../../../../src/api/upsales/currency');
-    const axios = require('axios');
-    axios.mockRejectedValue('Some error');
+  it("getMasterCurrency should throw exception in case of axios promise rejection", async () => {
+    const UpsalesApi = require("../../../../src/api/upsales/currency");
+    const axios = require("axios");
+    axios.mockRejectedValue("Some error");
     const upsalesApi = new UpsalesApi(
       { apiKey: API_KEY },
       { axios, errorsHelper, logger }
@@ -122,13 +122,13 @@ describe('src/api/upsales/currency.js: getMasterCurrency', () => {
   });
 });
 
-describe('src/api/upsales/currency.js: findMasterCurrency', () => {
+describe("src/api/upsales/currency.js: findMasterCurrency", () => {
   beforeEach(() => {
     jest.resetModules();
   });
 
-  it('findMasterCurrency should return correct master currency ISO code', async () => {
-    const UpsalesApi = require('../../../../src/api/upsales/currency');
+  it("findMasterCurrency should return correct master currency ISO code", async () => {
+    const UpsalesApi = require("../../../../src/api/upsales/currency");
     const upsalesApi = new UpsalesApi({}, { errorsHelper, logger });
 
     const masterCurrency = await upsalesApi.findMasterCurrency(
@@ -138,8 +138,8 @@ describe('src/api/upsales/currency.js: findMasterCurrency', () => {
     expect(masterCurrency).toEqual(getDefaultMasterCurrency());
   });
 
-  it('findMasterCurrency should catch, wrap and re-throw exceptions', async () => {
-    const UpsalesApi = require('../../../../src/api/upsales/currency');
+  it("findMasterCurrency should catch, wrap and re-throw exceptions", async () => {
+    const UpsalesApi = require("../../../../src/api/upsales/currency");
     const upsalesApi = new UpsalesApi({}, { errorsHelper, logger });
 
     try {

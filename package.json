@@ -58,8 +58,5 @@
       "eslint --fix",
       "git add"
     ]
-  },
-  "prettier": {
-    "singleQuote": true
   }
 }

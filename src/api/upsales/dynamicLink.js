@@ -1,14 +1,14 @@
-const errors = require('./errors');
-const requiredInput = require('../../helpers/errorsHelper').requiredInput;
+const errors = require("./errors");
+const requiredInput = require("../../helpers/errorsHelper").requiredInput;
 
 module.exports = function(
-  { apiKey } = requiredInput('options'),
-  { axios, errorsHelper, logger } = requiredInput('dependencies')
+  { apiKey } = requiredInput("options"),
+  { axios, errorsHelper, logger } = requiredInput("dependencies")
 ) {
   const createDynamicLink = async linkObject => {
     try {
       const upsalesPowerApiUrl =
-        'https://power.upsales.com/api/v2/link?token=' + apiKey;
+        "https://power.upsales.com/api/v2/link?token=" + apiKey;
       const upsalesResponse = await axios
         .post(upsalesPowerApiUrl, linkObject)
         .then(result => result.data);
@@ -25,7 +25,7 @@ module.exports = function(
   const loadDynamicLinks = async () => {
     try {
       const upsalesPowerApiUrl =
-        'https://power.upsales.com/api/v2/link?token=' + apiKey;
+        "https://power.upsales.com/api/v2/link?token=" + apiKey;
       const upsalesResponse = await axios
         .get(upsalesPowerApiUrl)
         .then(result => (result.data ? result.data.data : []));
@@ -66,11 +66,11 @@ module.exports = function(
   const createDynamicLinkIfNecessary = async linkObject => {
     try {
       if (await isDynamicLinkExist(linkObject)) {
-        logger.info('Dynamic link already exists.');
+        logger.info("Dynamic link already exists.");
         return;
       }
 
-      logger.info('Creating new dynamic link...');
+      logger.info("Creating new dynamic link...");
       return await createDynamicLink(linkObject);
     } catch (err) {
       const errorToReport = errorsHelper.wrapError(

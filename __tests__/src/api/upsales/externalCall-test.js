@@ -1,20 +1,20 @@
-const errorsHelper = require('../../../../src/helpers/errorsHelper');
-const logger = require('../../../../src/helpers/log');
+const errorsHelper = require("../../../../src/helpers/errorsHelper");
+const logger = require("../../../../src/helpers/log");
 
-const CUSTOMER_ID = '1002';
-const AUTHENTICATION_KEY = 'somekey';
+const CUSTOMER_ID = "1002";
+const AUTHENTICATION_KEY = "somekey";
 const APP_ID = 300;
 const DATA = {
-  field1: 'data1',
-  field2: 'some data 2'
+  field1: "data1",
+  field2: "some data 2"
 };
 
 const getCallHookOptions = () => {
   return {
-    method: 'POST',
+    method: "POST",
     url: `https://integration.upsales.com/api/external/appHook?customerId=${CUSTOMER_ID}&authenticationKey=${AUTHENTICATION_KEY}&appId=${APP_ID}`,
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     },
     data: DATA
   };
@@ -22,19 +22,19 @@ const getCallHookOptions = () => {
 
 const getCallHookPostResponse = () => {
   return {
-    data: 'SOME_RESULT'
+    data: "SOME_RESULT"
   };
 };
 
-describe('src/api/upsales/externalCall.js: callHook', () => {
+describe("src/api/upsales/externalCall.js: callHook", () => {
   beforeEach(() => {
     jest.resetModules();
-    jest.mock('axios');
+    jest.mock("axios");
   });
 
-  it('callHook should send correct POST request to Upsales to call app hook', async () => {
-    const UpsalesApi = require('../../../../src/api/upsales/externalCall');
-    const axios = require('axios');
+  it("callHook should send correct POST request to Upsales to call app hook", async () => {
+    const UpsalesApi = require("../../../../src/api/upsales/externalCall");
+    const axios = require("axios");
     axios.mockResolvedValue(getCallHookPostResponse());
     const upsalesApi = new UpsalesApi(
       { integrationId: APP_ID, authenticationKey: AUTHENTICATION_KEY },
@@ -47,10 +47,10 @@ describe('src/api/upsales/externalCall.js: callHook', () => {
     expect(axios.mock.calls[0]).toEqual([getCallHookOptions()]);
   });
 
-  it('callHook should throw exception in case of axios promise rejection', async () => {
-    const UpsalesApi = require('../../../../src/api/upsales/externalCall');
-    const axios = require('axios');
-    axios.mockRejectedValue('Some error');
+  it("callHook should throw exception in case of axios promise rejection", async () => {
+    const UpsalesApi = require("../../../../src/api/upsales/externalCall");
+    const axios = require("axios");
+    axios.mockRejectedValue("Some error");
     const upsalesApi = new UpsalesApi(
       { integrationId: APP_ID, authenticationKey: AUTHENTICATION_KEY },
       { axios, errorsHelper, logger }

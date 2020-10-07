@@ -1,18 +1,18 @@
-const { BadRequest } = require('http-errors');
-const Upsales = require('@upsales/node-upsales');
+const { BadRequest } = require("http-errors");
+const Upsales = require("@upsales/node-upsales");
 
 const getClient = (id, apiKey, apiServer) =>
   new Promise((resolve, reject) => {
     const upsales = new Upsales({
       key: apiKey,
-      server: apiServer.replace('/api/', '')
+      server: apiServer.replace("/api/", "")
     });
     upsales.client.get(id, (err, res) => {
       if (err) {
         return reject(err);
       }
       if (!res.data) {
-        return reject('Not found');
+        return reject("Not found");
       }
       resolve(res.data);
     });
@@ -35,35 +35,35 @@ const findOrgField = client => {
 
 module.exports = async (req = {}) => {
   if (!req.data || !req.data.obj) {
-    throw new BadRequest('Missing order'); // This is bad
+    throw new BadRequest("Missing order"); // This is bad
   }
 
   const order = req.data.obj;
 
   if (order.probability !== 100) {
-    return 'ok';
+    return "ok";
   }
 
   const clientId = !isNaN(order.client)
     ? order.client
     : (order.client || {}).id;
   if (!clientId) {
-    throw new BadRequest('Missing client');
+    throw new BadRequest("Missing client");
   }
 
   let client;
   try {
     client = await getClient(clientId, req.apiKey, req.apiPath);
   } catch (e) {
-    throw new BadRequest('Missing client');
+    throw new BadRequest("Missing client");
   }
 
   // Find org no. field (fieldId = 1)
   const orgNoField = findOrgField(client);
 
   if (!orgNoField) {
-    throw new BadRequest('Missing orgno.');
+    throw new BadRequest("Missing orgno.");
   }
 
-  return 'ok';
+  return "ok";
 };

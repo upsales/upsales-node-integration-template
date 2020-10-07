@@ -1,12 +1,12 @@
-const ActualUpsales = require.requireActual('@upsales/node-upsales-promise');
-const Upsales = jest.genMockFromModule('@upsales/node-upsales-promise');
+const ActualUpsales = require.requireActual("@upsales/node-upsales-promise");
+const Upsales = jest.genMockFromModule("@upsales/node-upsales-promise");
 
-const actualUpsales = new ActualUpsales({ key: 'key' });
+const actualUpsales = new ActualUpsales({ key: "key" });
 const instance = {};
 
 const bindJestFn = (propName, prototype, customfield) => {
   Object.getOwnPropertyNames(prototype).forEach(fnName => {
-    if (typeof prototype[fnName] !== 'function') return;
+    if (typeof prototype[fnName] !== "function") return;
     if (customfield) {
       instance[propName].customfields[fnName] = jest.fn(() =>
         Promise.resolve()
@@ -20,7 +20,7 @@ const bindJestFn = (propName, prototype, customfield) => {
 Object.getOwnPropertyNames(actualUpsales).forEach(propName => {
   if (
     actualUpsales[propName] &&
-    typeof actualUpsales[propName] === 'object' &&
+    typeof actualUpsales[propName] === "object" &&
     Object.getPrototypeOf(actualUpsales[propName])
   ) {
     instance[propName] = {};

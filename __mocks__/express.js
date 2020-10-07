@@ -24,11 +24,11 @@ const res = (exports._res = {
 
 const router = {
   use: jest.fn(),
-  post: routerFn('post'),
-  get: routerFn('get'),
-  put: routerFn('put'),
-  all: routerFn('post'),
-  delete: routerFn('delete'),
+  post: routerFn("post"),
+  get: routerFn("get"),
+  put: routerFn("put"),
+  all: routerFn("post"),
+  delete: routerFn("delete"),
   __runner: async (type, data = {}, params = {}) => {
     runners[type](
       {

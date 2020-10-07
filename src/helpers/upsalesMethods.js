@@ -3,8 +3,8 @@ const requiredInput = name => {
 };
 
 exports.getCfValue = ({
-  upsalesEntity = requiredInput('upsalesEntity'),
-  fieldId = requiredInput('fieldId')
+  upsalesEntity = requiredInput("upsalesEntity"),
+  fieldId = requiredInput("fieldId")
 }) => {
   if (!upsalesEntity.custom) {
     return null;
@@ -18,8 +18,8 @@ exports.getCfValue = ({
 };
 
 exports.getCfValueByAlias = ({
-  upsalesEntity = requiredInput('upsalesEntity'),
-  alias = requiredInput('alias')
+  upsalesEntity = requiredInput("upsalesEntity"),
+  alias = requiredInput("alias")
 }) => {
   if (!upsalesEntity.custom) {
     return null;
@@ -33,9 +33,9 @@ exports.getCfValueByAlias = ({
 };
 
 exports.setCfValue = ({
-  upsalesEntity = requiredInput('upsalesEntity'),
-  fieldId = requiredInput('fieldId'),
-  value = requiredInput('value')
+  upsalesEntity = requiredInput("upsalesEntity"),
+  fieldId = requiredInput("fieldId"),
+  value = requiredInput("value")
 }) => {
   if (!upsalesEntity.custom) {
     upsalesEntity.custom = [];
@@ -53,4 +53,4 @@ exports.setCfValue = ({
 };
 
 exports.isApiUser = req =>
-  req.body && req.body.user && req.body.user.email.includes('@api.upsales.com');
+  req.body && req.body.user && req.body.user.email.includes("@api.upsales.com");

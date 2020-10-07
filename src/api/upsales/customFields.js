@@ -1,10 +1,10 @@
-const Cache = require('./helpers/customFieldsCache');
-const errors = require('./errors');
-const requiredInput = require('../../helpers/errorsHelper').requiredInput;
+const Cache = require("./helpers/customFieldsCache");
+const errors = require("./errors");
+const requiredInput = require("../../helpers/errorsHelper").requiredInput;
 
 module.exports = function(
   options,
-  { upsales, errorsHelper, logger } = requiredInput('dependencies')
+  { upsales, errorsHelper, logger } = requiredInput("dependencies")
 ) {
   const cache = Cache();
 
@@ -256,7 +256,7 @@ module.exports = function(
       const fieldName = fieldDescription.name;
 
       try {
-        logger.info('Retrieve ' + fieldName + ' field...');
+        logger.info("Retrieve " + fieldName + " field...");
         field = await loadEntityFieldByAlias(entityType, fieldAlias, cached);
       } catch (err) {
         const errorToReport = errorsHelper.wrapError(
@@ -267,7 +267,7 @@ module.exports = function(
       }
 
       if (field == null) {
-        logger.info(fieldName + ' field not found. Creating one...');
+        logger.info(fieldName + " field not found. Creating one...");
         const data = Object.assign({}, fieldDescription);
 
         field = await upsales[entityType].customfields.create(data);
@@ -277,9 +277,9 @@ module.exports = function(
           cache.addField(entityType, field);
         }
 
-        logger.info(fieldName + ' field created.');
+        logger.info(fieldName + " field created.");
       } else {
-        logger.info(fieldName + ' field found.');
+        logger.info(fieldName + " field found.");
       }
     } catch (err) {
       const errorToReport = errorsHelper.wrapError(
@@ -308,13 +308,13 @@ module.exports = function(
 
       const results = [];
       for (const fieldMetadata of customFieldsList) {
-        logger.info('Check field: ' + fieldMetadata.comment);
+        logger.info("Check field: " + fieldMetadata.comment);
         const field = await ensureOneFieldExist(
           fieldMetadata.entityType,
           fieldMetadata.fieldDescription,
           cached
         );
-        logger.info('Finished: Check field: ' + fieldMetadata.comment);
+        logger.info("Finished: Check field: " + fieldMetadata.comment);
 
         if (field) {
           results.push(field);

@@ -1,8 +1,8 @@
 /**
  * Upsales API app config accessing wrapper
  */
-const errors = require('./errors');
-const requiredInput = require('../../helpers/errorsHelper').requiredInput;
+const errors = require("./errors");
+const requiredInput = require("../../helpers/errorsHelper").requiredInput;
 
 /**
  * Represents an Upsales API app config accessing wrapper
@@ -11,8 +11,8 @@ const requiredInput = require('../../helpers/errorsHelper').requiredInput;
  * @param {object} dependencies - dependencies (axios, errorsHelper, logger)
  */
 module.exports = function(
-  { apiKey, integrationId } = requiredInput('options'),
-  { axios, errorsHelper, logger } = requiredInput('dependencies')
+  { apiKey, integrationId } = requiredInput("options"),
+  { axios, errorsHelper, logger } = requiredInput("dependencies")
 ) {
   /**
    * Load app config from Upsales

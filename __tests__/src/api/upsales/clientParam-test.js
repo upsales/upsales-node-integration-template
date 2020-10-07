@@ -1,17 +1,17 @@
-const errorsHelper = require('../../../../src/helpers/errorsHelper');
-const logger = require('../../../../src/helpers/log');
+const errorsHelper = require("../../../../src/helpers/errorsHelper");
+const logger = require("../../../../src/helpers/log");
 
-const API_KEY = 'TEST_API_KEY';
+const API_KEY = "TEST_API_KEY";
 const PARAM_ID = 100;
-const PARAM_VALUE = 'SOME VALUE';
+const PARAM_VALUE = "SOME VALUE";
 
 const getClientParamOptions = () => {
   return {
-    method: 'PUT',
+    method: "PUT",
     url: `https://power.upsales.com/api/v2/master/clientParam/${PARAM_ID}`,
     headers: {
       Cookie: `token=${API_KEY}`,
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     },
     data: PARAM_VALUE
   };
@@ -19,19 +19,19 @@ const getClientParamOptions = () => {
 
 const getClientParameterPutResponse = () => {
   return {
-    data: 'SOME_RESULT'
+    data: "SOME_RESULT"
   };
 };
 
-describe('src/api/upsales/clientParam.js: set', () => {
+describe("src/api/upsales/clientParam.js: set", () => {
   beforeEach(() => {
     jest.resetModules();
-    jest.mock('axios');
+    jest.mock("axios");
   });
 
-  it('set should send correct PUT request to Upsales to change parameter value', async () => {
-    const UpsalesApi = require('../../../../src/api/upsales/clientParam');
-    const axios = require('axios');
+  it("set should send correct PUT request to Upsales to change parameter value", async () => {
+    const UpsalesApi = require("../../../../src/api/upsales/clientParam");
+    const axios = require("axios");
     axios.mockResolvedValue(getClientParameterPutResponse());
     const upsalesApi = new UpsalesApi(
       { apiKey: API_KEY },
@@ -44,10 +44,10 @@ describe('src/api/upsales/clientParam.js: set', () => {
     expect(axios.mock.calls[0]).toEqual([getClientParamOptions()]);
   });
 
-  it('set should throw exception in case of axios promise rejection', async () => {
-    const UpsalesApi = require('../../../../src/api/upsales/clientParam');
-    const axios = require('axios');
-    axios.mockRejectedValue('Some error');
+  it("set should throw exception in case of axios promise rejection", async () => {
+    const UpsalesApi = require("../../../../src/api/upsales/clientParam");
+    const axios = require("axios");
+    axios.mockRejectedValue("Some error");
     const upsalesApi = new UpsalesApi(
       { apiKey: API_KEY },
       { axios, errorsHelper, logger }

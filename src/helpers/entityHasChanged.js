@@ -23,9 +23,9 @@ const entityHasChanged = ({ oldEntity, newEntity }) => {
 
     if (
       newEntity !== null &&
-      typeof newEntity[key] === 'object' &&
+      typeof newEntity[key] === "object" &&
       oldEntity !== null &&
-      typeof oldEntity[key] === 'object'
+      typeof oldEntity[key] === "object"
     ) {
       return entityHasChanged({
         oldEntity: oldEntity[key],
@@ -39,7 +39,7 @@ const entityHasChanged = ({ oldEntity, newEntity }) => {
       oldValue = JSON.parse(JSON.stringify(oldEntity[key]));
     }
 
-    if (oldValue != null && typeof oldValue === 'object' && oldValue.id) {
+    if (oldValue != null && typeof oldValue === "object" && oldValue.id) {
       oldValue = oldValue.id;
     }
 
@@ -50,21 +50,21 @@ const entityHasChanged = ({ oldEntity, newEntity }) => {
       newValue = JSON.parse(JSON.stringify(newEntity[key]));
     }
 
-    if (newValue != null && typeof newValue === 'object' && newValue.id) {
+    if (newValue != null && typeof newValue === "object" && newValue.id) {
       newValue = newValue.id;
     }
 
     if (
       newValue === null ||
       newValue === undefined ||
-      newValue === '' ||
-      newValue === 'API_BLANK'
+      newValue === "" ||
+      newValue === "API_BLANK"
     ) {
-      newValue = '';
+      newValue = "";
     }
 
-    if (oldValue === null || oldValue === undefined || oldValue === '') {
-      oldValue = '';
+    if (oldValue === null || oldValue === undefined || oldValue === "") {
+      oldValue = "";
     }
 
     let hasChanged = newValue !== oldValue;

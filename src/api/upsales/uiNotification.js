@@ -1,20 +1,20 @@
-const errors = require('./errors');
-const requiredInput = require('../../helpers/errorsHelper').requiredInput;
+const errors = require("./errors");
+const requiredInput = require("../../helpers/errorsHelper").requiredInput;
 
 module.exports = function(
-  { apiKey, callbackUrl = '', importId = '' } = requiredInput('options'),
-  { axios, errorsHelper, logger } = requiredInput('dependencies')
+  { apiKey, callbackUrl = "", importId = "" } = requiredInput("options"),
+  { axios, errorsHelper, logger } = requiredInput("dependencies")
 ) {
   const safeSendProgress = async (progress, alternateImportId) => {
     try {
       const actualImportId = alternateImportId ? alternateImportId : importId;
 
       const options = {
-        method: 'PUT',
+        method: "PUT",
         url: `https://power.upsales.com/api/v2/onboardingimports/${actualImportId}`,
         headers: {
           Cookie: `token=${apiKey}`,
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json"
         },
         data: {
           id: actualImportId,
@@ -22,9 +22,9 @@ module.exports = function(
         }
       };
 
-      logger.info('Sending progress: ' + progress);
+      logger.info("Sending progress: " + progress);
       const upsalesResponse = await axios(options).then(result => {
-        logger.info('Progress sent successfully: ' + progress);
+        logger.info("Progress sent successfully: " + progress);
         return result.data;
       });
       return upsalesResponse;
@@ -62,25 +62,25 @@ module.exports = function(
         ? alternateCallbackUrl
         : callbackUrl;
 
-      if (typeof notification === 'string') {
+      if (typeof notification === "string") {
         notification = {
           notify: notification
         };
       }
 
       const options = {
-        method: 'POST',
+        method: "POST",
         url: actualCallbackUrl,
         headers: {
           Cookie: `token=${apiKey}`,
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json"
         },
         data: notification
       };
 
-      logger.info('Sending message to UI: ' + notification.notify);
+      logger.info("Sending message to UI: " + notification.notify);
       const upsalesResponse = await axios(options).then(result => {
-        logger.info('Message to UI sent successfully: ' + notification.notify);
+        logger.info("Message to UI sent successfully: " + notification.notify);
         return result.data;
       });
       return upsalesResponse;

@@ -1,6 +1,6 @@
-const winston = require('winston');
+const winston = require("winston");
 
-const level = process.env.LOG_LEVEL || 'debug';
+const level = process.env.LOG_LEVEL || "debug";
 
 const logger = new winston.Logger({
   transports: [
@@ -10,7 +10,7 @@ const logger = new winston.Logger({
         return new Date().toISOString();
       },
       colorize: true,
-      json: process.env.NODE_ENV === 'production',
+      json: process.env.NODE_ENV === "production",
       stringify: obj => JSON.stringify(obj)
     })
   ]

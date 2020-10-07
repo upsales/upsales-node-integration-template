@@ -3,7 +3,7 @@ exports.getMockUpsalesClient = (overrides = {}) => {
     {},
     {
       id: 1,
-      name: 'name',
+      name: "name",
       custom: []
     },
     overrides
@@ -15,50 +15,50 @@ exports.getMockUpsalesOrder = (overrides = {}) => {
     {},
     {
       id: 1,
-      description: 'description',
-      date: '2019-01-01',
-      closeDate: '2019-01-02',
-      notes: 'notes',
+      description: "description",
+      date: "2019-01-01",
+      closeDate: "2019-01-02",
+      notes: "notes",
       user: {
         id: 1,
-        name: 'User Name',
+        name: "User Name",
         role: {
-          name: 'User role',
+          name: "User role",
           id: 1
         },
-        email: 'user@upsales.se'
+        email: "user@upsales.se"
       },
       client: {
-        name: 'Client AB',
+        name: "Client AB",
         id: 1,
         users: [
           {
             id: 1,
-            name: 'Client User Name',
+            name: "Client User Name",
             role: {
-              name: 'User role',
+              name: "User role",
               id: 1
             },
-            email: 'clientuser@upsales.se'
+            email: "clientuser@upsales.se"
           }
         ]
       },
       contact: {
-        name: 'Contact Name',
+        name: "Contact Name",
         id: 1,
-        email: 'contactuser@upsales.se'
+        email: "contactuser@upsales.se"
       },
-      currency: 'SEK',
+      currency: "SEK",
       currencyRate: 1,
       custom: [
         {
           fieldId: 1,
-          value: 'value'
+          value: "value"
         }
       ],
       probability: 100,
       stage: {
-        name: 'Avslutad - Order',
+        name: "Avslutad - Order",
         id: 1
       },
       orderRow: [
@@ -71,16 +71,16 @@ exports.getMockUpsalesOrder = (overrides = {}) => {
           productId: 1,
           sortId: 1,
           product: {
-            name: 'product name',
+            name: "product name",
             id: 1,
             category: null
           }
         }
       ],
-      regDate: '2019-01-01T15:04:58.000Z',
-      modDate: '2019-01-01T15:04:58.000Z',
+      regDate: "2019-01-01T15:04:58.000Z",
+      modDate: "2019-01-01T15:04:58.000Z",
       project: {
-        name: 'project name',
+        name: "project name",
         id: 1
       },
       clientConnection: null,

@@ -1,7 +1,7 @@
-require('dotenv').config(); // init environment variables
-const log = require('./helpers/log');
-const app = require('./app');
-const { promisify } = require('util');
+require("dotenv").config(); // init environment variables
+const log = require("./helpers/log");
+const app = require("./app");
+const { promisify } = require("util");
 
 app.listen = promisify(app.listen);
 
