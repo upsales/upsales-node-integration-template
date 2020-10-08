@@ -1,13 +1,11 @@
-const serializeError = require('serialize-error');
+const serializeError = require("serialize-error");
 
-
-const requiredInput = (name) => {
+const requiredInput = name => {
   throw {
-    code: 'REQUIRED_FUNCTION_PARAMETER_MISSING',
+    code: "REQUIRED_FUNCTION_PARAMETER_MISSING",
     message: `Parameter ${name} is required`
   };
 };
-
 
 const wrapError = (options, cause) => {
   try {
@@ -24,16 +22,15 @@ const wrapError = (options, cause) => {
     }
 
     return {
-      code: options.code ? options.code : '',
-      message: options.message ? options.message : '',
+      code: options.code ? options.code : "",
+      message: options.message ? options.message : "",
       cause: serializedError
-    }
+    };
   } catch (err) {
     //Ignore errors
     return options;
   }
 };
-
 
 module.exports = {
   requiredInput: requiredInput,

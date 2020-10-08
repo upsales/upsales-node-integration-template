@@ -1,15 +1,16 @@
-const Cache = require('./helpers/customFieldsCache');
-const errors = require('./errors');
-const requiredInput = require('../../helpers/errorsHelper').requiredInput;
+const Cache = require("./helpers/customFieldsCache");
+const errors = require("./errors");
+const requiredInput = require("../../helpers/errorsHelper").requiredInput;
 
-module.exports = function (options, { upsales, errorsHelper, logger } = requiredInput('dependencies')) {
+module.exports = function(
+  options,
+  { upsales, errorsHelper, logger } = requiredInput("dependencies")
+) {
   const cache = Cache();
 
-
-  const clearCache = (entityType) => {
+  const clearCache = entityType => {
     cache.clear(entityType);
-  }
-
+  };
 
   const getById = (customFields, fieldId) => {
     try {
@@ -17,18 +18,19 @@ module.exports = function (options, { upsales, errorsHelper, logger } = required
         return;
       }
 
-      const field = customFields.find((element) => {
-        return element.fieldId == fieldId;
+      const field = customFields.find(element => {
+        return element.fieldId === fieldId;
       });
 
       return field;
-
     } catch (err) {
-      const errorToReport = errorsHelper.wrapError(errors.FIND_CUSTOM_FIELD_BY_ID_ERROR, err);
+      const errorToReport = errorsHelper.wrapError(
+        errors.FIND_CUSTOM_FIELD_BY_ID_ERROR,
+        err
+      );
       logger.error(errorToReport);
     }
   };
-
 
   const getByAlias = async (customFields, entityType, alias, cached = true) => {
     try {
@@ -36,7 +38,11 @@ module.exports = function (options, { upsales, errorsHelper, logger } = required
         return;
       }
 
-      const fieldMetadata = await loadEntityFieldByAlias(entityType, alias, cached);
+      const fieldMetadata = await loadEntityFieldByAlias(
+        entityType,
+        alias,
+        cached
+      );
       if (!fieldMetadata) {
         logger.info(`Could not find ${entityType} custom field ${alias}.`);
         return;
@@ -44,18 +50,19 @@ module.exports = function (options, { upsales, errorsHelper, logger } = required
 
       const fieldId = fieldMetadata.id;
 
-      const field = customFields.find((element) => {
-        return element.fieldId == fieldId;
+      const field = customFields.find(element => {
+        return element.fieldId === fieldId;
       });
 
       return field;
-
     } catch (err) {
-      const errorToReport = errorsHelper.wrapError(errors.FIND_CUSTOM_FIELD_BY_ALIAS_ERROR, err);
+      const errorToReport = errorsHelper.wrapError(
+        errors.FIND_CUSTOM_FIELD_BY_ALIAS_ERROR,
+        err
+      );
       logger.error(errorToReport);
     }
   };
-
 
   const getValueById = (customFields, fieldId) => {
     try {
@@ -64,28 +71,35 @@ module.exports = function (options, { upsales, errorsHelper, logger } = required
         return;
       }
       return field.value;
-
     } catch (err) {
-      const errorToReport = errorsHelper.wrapError(errors.FIND_CUSTOM_FIELD_VALUE_BY_ID_ERROR, err);
+      const errorToReport = errorsHelper.wrapError(
+        errors.FIND_CUSTOM_FIELD_VALUE_BY_ID_ERROR,
+        err
+      );
       logger.error(errorToReport);
     }
   };
 
-
-  const getValueByAlias = async (customFields, entityType, alias, cached = true) => {
+  const getValueByAlias = async (
+    customFields,
+    entityType,
+    alias,
+    cached = true
+  ) => {
     try {
       const field = await getByAlias(customFields, entityType, alias, cached);
       if (!field) {
         return;
       }
       return field.value;
-
     } catch (err) {
-      const errorToReport = errorsHelper.wrapError(errors.FIND_CUSTOM_FIELD_VALUE_BY_ALIAS_ERROR, err);
+      const errorToReport = errorsHelper.wrapError(
+        errors.FIND_CUSTOM_FIELD_VALUE_BY_ALIAS_ERROR,
+        err
+      );
       logger.error(errorToReport);
     }
   };
-
 
   const setById = (upsalesEntity, field) => {
     try {
@@ -93,27 +107,33 @@ module.exports = function (options, { upsales, errorsHelper, logger } = required
         upsalesEntity.custom = [];
       }
 
-      const fieldIndex = upsalesEntity.custom.findIndex((element) => {
-        return element.fieldId == field.fieldId;
+      const fieldIndex = upsalesEntity.custom.findIndex(element => {
+        return element.fieldId === field.fieldId;
       });
 
       if (fieldIndex < 0) {
         upsalesEntity.custom.push(field);
-
       } else {
         upsalesEntity.custom.splice(fieldIndex, 1, field);
       }
-
     } catch (err) {
-      const errorToReport = errorsHelper.wrapError(errors.SET_CUSTOM_FIELD_VALUE_ERROR, err);
+      const errorToReport = errorsHelper.wrapError(
+        errors.SET_CUSTOM_FIELD_VALUE_ERROR,
+        err
+      );
       logger.error(errorToReport);
     }
 
     return upsalesEntity;
   };
 
-
-  const setByAlias = async (upsalesEntity, entityType, alias, field, cached = true) => {
+  const setByAlias = async (
+    upsalesEntity,
+    entityType,
+    alias,
+    field,
+    cached = true
+  ) => {
     const metadata = await loadEntityFieldByAlias(entityType, alias, cached);
     if (!metadata) {
       return upsalesEntity;
@@ -123,28 +143,35 @@ module.exports = function (options, { upsales, errorsHelper, logger } = required
     return setById(upsalesEntity, field);
   };
 
-
   const setValueById = (upsalesEntity, fieldId, value) => {
-    return setById(upsalesEntity,
+    return setById(upsalesEntity, {
+      fieldId: fieldId,
+      value: value
+    });
+  };
+
+  const setValueByAlias = async (
+    upsalesEntity,
+    entityType,
+    alias,
+    value,
+    cached = true
+  ) => {
+    return await setByAlias(
+      upsalesEntity,
+      entityType,
+      alias,
       {
-        fieldId: fieldId,
         value: value
-      }
+      },
+      cached
     );
   };
 
-
-  const setValueByAlias = async (upsalesEntity, entityType, alias, value, cached = true) => {
-    return await setByAlias(upsalesEntity, entityType, alias, {
-      value: value
-    }, cached);
-  };
-
-
   const findFieldByAlias = (fields, alias) => {
-    const safeAliasEqualsFunc = (element) => {
+    const safeAliasEqualsFunc = element => {
       try {
-        return element.alias.toUpperCase() == alias;
+        return element.alias.toUpperCase() === alias;
       } catch (err) {
         //Ignore any errors
       }
@@ -153,13 +180,14 @@ module.exports = function (options, { upsales, errorsHelper, logger } = required
     try {
       alias = alias.toUpperCase();
       return fields.find(safeAliasEqualsFunc);
-
     } catch (err) {
-      const errorToReport = errorsHelper.wrapError(errors.FIND_CUSTOM_FIELD_BY_ALIAS_ERROR, err);
+      const errorToReport = errorsHelper.wrapError(
+        errors.FIND_CUSTOM_FIELD_BY_ALIAS_ERROR,
+        err
+      );
       logger.error(errorToReport);
     }
   };
-
 
   const loadEntityFields = async (entityType, cached = true) => {
     try {
@@ -169,7 +197,7 @@ module.exports = function (options, { upsales, errorsHelper, logger } = required
         customFields = cache.getEntityFields(entityType);
       }
 
-      if (!customFields || customFields.length == 0) {
+      if (!customFields || customFields.length === 0) {
         customFields = await upsales[entityType].customfields.list();
         if (cached) {
           cache.replaceFields(entityType, customFields);
@@ -177,15 +205,16 @@ module.exports = function (options, { upsales, errorsHelper, logger } = required
       }
 
       return customFields;
-
     } catch (err) {
-      const errorToReport = errorsHelper.wrapError(errors.LOAD_ENTITY_FIELDS_ERROR, err);
+      const errorToReport = errorsHelper.wrapError(
+        errors.LOAD_ENTITY_FIELDS_ERROR,
+        err
+      );
       logger.error(errorToReport);
     }
 
     return {};
-  }
-
+  };
 
   const loadEntityFieldByAlias = async (entityType, alias, cached = true) => {
     try {
@@ -205,15 +234,20 @@ module.exports = function (options, { upsales, errorsHelper, logger } = required
       }
 
       return foundField;
-
     } catch (err) {
-      const errorToReport = errorsHelper.wrapError(errors.LOAD_CUSTOM_FIELD_BY_ALIAS_ERROR, err);
+      const errorToReport = errorsHelper.wrapError(
+        errors.LOAD_CUSTOM_FIELD_BY_ALIAS_ERROR,
+        err
+      );
       logger.error(errorToReport);
     }
   };
 
-
-  const ensureOneFieldExist = async (entityType, fieldDescription, cached = true) => {
+  const ensureOneFieldExist = async (
+    entityType,
+    fieldDescription,
+    cached = true
+  ) => {
     let field;
     let isNew = false;
 
@@ -222,15 +256,18 @@ module.exports = function (options, { upsales, errorsHelper, logger } = required
       const fieldName = fieldDescription.name;
 
       try {
-        logger.info('Retrieve ' + fieldName + ' field...');
+        logger.info("Retrieve " + fieldName + " field...");
         field = await loadEntityFieldByAlias(entityType, fieldAlias, cached);
       } catch (err) {
-        const errorToReport = errorsHelper.wrapError(errors.ENSURE_CUSTOM_FIELDS_EXIST_POSSIBLE_ERROR, err);
+        const errorToReport = errorsHelper.wrapError(
+          errors.ENSURE_CUSTOM_FIELDS_EXIST_POSSIBLE_ERROR,
+          err
+        );
         logger.debug(errorToReport);
       }
 
       if (field == null) {
-        logger.info(fieldName + ' field not found. Creating one...');
+        logger.info(fieldName + " field not found. Creating one...");
         const data = Object.assign({}, fieldDescription);
 
         field = await upsales[entityType].customfields.create(data);
@@ -240,13 +277,15 @@ module.exports = function (options, { upsales, errorsHelper, logger } = required
           cache.addField(entityType, field);
         }
 
-        logger.info(fieldName + ' field created.');
+        logger.info(fieldName + " field created.");
       } else {
-        logger.info(fieldName + ' field found.');
+        logger.info(fieldName + " field found.");
       }
-
     } catch (err) {
-      const errorToReport = errorsHelper.wrapError(errors.ENSURE_ONE_CUSTOM_FIELD_EXIST_ERROR, err);
+      const errorToReport = errorsHelper.wrapError(
+        errors.ENSURE_ONE_CUSTOM_FIELD_EXIST_ERROR,
+        err
+      );
       logger.error(errorToReport);
     }
 
@@ -260,19 +299,22 @@ module.exports = function (options, { upsales, errorsHelper, logger } = required
     };
   };
 
-
   const ensureFieldsExist = async (customFieldsList, cached = true) => {
     try {
       const isArrayReceived = Array.isArray(customFieldsList);
       if (!isArrayReceived) {
-        customFieldsList = [ customFieldsList ];
+        customFieldsList = [customFieldsList];
       }
 
       const results = [];
       for (const fieldMetadata of customFieldsList) {
-        logger.info('Check field: ' + fieldMetadata.comment);
-        const field = await ensureOneFieldExist(fieldMetadata.entityType, fieldMetadata.fieldDescription, cached);
-        logger.info('Finished: Check field: ' + fieldMetadata.comment);
+        logger.info("Check field: " + fieldMetadata.comment);
+        const field = await ensureOneFieldExist(
+          fieldMetadata.entityType,
+          fieldMetadata.fieldDescription,
+          cached
+        );
+        logger.info("Finished: Check field: " + fieldMetadata.comment);
 
         if (field) {
           results.push(field);
@@ -285,11 +327,13 @@ module.exports = function (options, { upsales, errorsHelper, logger } = required
         return results[0];
       }
     } catch (err) {
-      const errorToReport = errorsHelper.wrapError(errors.ENSURE_CUSTOM_FIELDS_EXIST_ERROR, err);
+      const errorToReport = errorsHelper.wrapError(
+        errors.ENSURE_CUSTOM_FIELDS_EXIST_ERROR,
+        err
+      );
       logger.error(errorToReport);
     }
   };
-
 
   return {
     metadata: {
@@ -311,5 +355,4 @@ module.exports = function (options, { upsales, errorsHelper, logger } = required
     setValueByAlias,
     setValueById
   };
-
 };
