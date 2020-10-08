@@ -1,16 +1,16 @@
-const requiredInput = name => {
+const requiredInput = (name) => {
   throw new Error(`Parameter ${name} is required`);
 };
 
 exports.getCfValue = ({
   upsalesEntity = requiredInput("upsalesEntity"),
-  fieldId = requiredInput("fieldId")
+  fieldId = requiredInput("fieldId"),
 }) => {
   if (!upsalesEntity.custom) {
     return null;
   }
 
-  const field = upsalesEntity.custom.find(customField => {
+  const field = upsalesEntity.custom.find((customField) => {
     return customField.fieldId === fieldId;
   });
 
@@ -19,13 +19,13 @@ exports.getCfValue = ({
 
 exports.getCfValueByAlias = ({
   upsalesEntity = requiredInput("upsalesEntity"),
-  alias = requiredInput("alias")
+  alias = requiredInput("alias"),
 }) => {
   if (!upsalesEntity.custom) {
     return null;
   }
 
-  const field = upsalesEntity.custom.find(customField => {
+  const field = upsalesEntity.custom.find((customField) => {
     return customField.alias === alias;
   });
 
@@ -35,13 +35,13 @@ exports.getCfValueByAlias = ({
 exports.setCfValue = ({
   upsalesEntity = requiredInput("upsalesEntity"),
   fieldId = requiredInput("fieldId"),
-  value = requiredInput("value")
+  value = requiredInput("value"),
 }) => {
   if (!upsalesEntity.custom) {
     upsalesEntity.custom = [];
   }
 
-  const field = upsalesEntity.custom.find(customField => {
+  const field = upsalesEntity.custom.find((customField) => {
     return customField.fieldId === fieldId;
   });
 
@@ -52,5 +52,5 @@ exports.setCfValue = ({
   }
 };
 
-exports.isApiUser = req =>
+exports.isApiUser = (req) =>
   req.body && req.body.user && req.body.user.email.includes("@api.upsales.com");

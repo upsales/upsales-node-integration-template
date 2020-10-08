@@ -2,7 +2,7 @@ const winston = require("winston");
 
 const level = process.env.LOG_LEVEL || "debug";
 
-const logger = new winston.Logger({
+const logger = winston.createLogger({
   transports: [
     new winston.transports.Console({
       level: level,
@@ -11,9 +11,9 @@ const logger = new winston.Logger({
       },
       colorize: true,
       json: process.env.NODE_ENV === "production",
-      stringify: obj => JSON.stringify(obj)
-    })
-  ]
+      stringify: (obj) => JSON.stringify(obj),
+    }),
+  ],
 });
 
 module.exports = logger;
