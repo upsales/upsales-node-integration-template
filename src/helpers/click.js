@@ -4,6 +4,10 @@ const Create = (props) => ({
 	options: props.options
 });
 
+const CloseModal = () => ({
+	type: 'closeModal',
+});
+
 const Modal = (props) => ({
 	type: 'modal',
 	fullscreen: props.fullscreen, // boolean
@@ -47,6 +51,7 @@ const Window = (props) => ({
 
 module.exports = {
 	Create,
+	CloseModal,
 	Modal,
 	Navigate,
 	NavigateToConfig,
