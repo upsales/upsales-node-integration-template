@@ -11,8 +11,10 @@ const CloseModal = () => ({
 const Modal = (props) => ({
 	type: 'modal',
 	fullscreen: props.fullscreen, // boolean
-	name: props.name
+	name: props.name,
+	size: props.size // sm, md, lg, xl, dynamic
 });
+
 
 const Navigate = (props) => ({
 	type: 'navigate',
