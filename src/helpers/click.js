@@ -4,11 +4,17 @@ const Create = (props) => ({
 	options: props.options
 });
 
+const CloseModal = () => ({
+	type: 'closeModal',
+});
+
 const Modal = (props) => ({
 	type: 'modal',
 	fullscreen: props.fullscreen, // boolean
-	name: props.name
+	name: props.name,
+	size: props.size // sm, md, lg, xl, dynamic
 });
+
 
 const Navigate = (props) => ({
 	type: 'navigate',
@@ -47,6 +53,7 @@ const Window = (props) => ({
 
 module.exports = {
 	Create,
+	CloseModal,
 	Modal,
 	Navigate,
 	NavigateToConfig,
