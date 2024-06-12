@@ -1,12 +1,10 @@
-module.exports = function () {
-  let cache = { };
+module.exports = function() {
+  let cache = {};
 
-
-  const clear = (entityType) => {
+  const clear = entityType => {
     try {
       if (!entityType) {
         cache = {};
-
       } else {
         initEmptyRoots();
 
@@ -18,7 +16,6 @@ module.exports = function () {
       //Ignore errors
     }
   };
-
 
   const initEmptyRoots = () => {
     try {
@@ -38,8 +35,7 @@ module.exports = function () {
     }
   };
 
-
-  const initEmptyEntityRoots = (entityType) => {
+  const initEmptyEntityRoots = entityType => {
     try {
       initEmptyRoots();
 
@@ -59,7 +55,6 @@ module.exports = function () {
     }
   };
 
-
   const replaceFields = (entityType, fields) => {
     try {
       initEmptyEntityRoots(entityType);
@@ -74,7 +69,6 @@ module.exports = function () {
       //Ignore errors
     }
   };
-
 
   const addField = (entityType, field) => {
     try {
@@ -98,8 +92,7 @@ module.exports = function () {
     }
   };
 
-
-  const getEntityFields = (entityType) => {
+  const getEntityFields = entityType => {
     try {
       initEmptyEntityRoots(entityType);
       return cache.fieldsList[entityType];
@@ -108,8 +101,7 @@ module.exports = function () {
     }
   };
 
-
-  const getEntityFieldsByAliasMap = (entityType) => {
+  const getEntityFieldsByAliasMap = entityType => {
     try {
       initEmptyEntityRoots(entityType);
       return cache.byAlias[entityType];
@@ -118,8 +110,7 @@ module.exports = function () {
     }
   };
 
-
-  const getEntityFieldsByIdMap = (entityType) => {
+  const getEntityFieldsByIdMap = entityType => {
     try {
       initEmptyEntityRoots(entityType);
       return cache.byId[entityType];
@@ -127,7 +118,6 @@ module.exports = function () {
       //Ignore errors
     }
   };
-
 
   const getByAlias = (entityType, alias) => {
     try {
@@ -138,7 +128,6 @@ module.exports = function () {
     }
   };
 
-
   const getById = (entityType, id) => {
     try {
       initEmptyEntityRoots(entityType);
@@ -147,7 +136,6 @@ module.exports = function () {
       //Ignore errors
     }
   };
-
 
   return {
     addField,
